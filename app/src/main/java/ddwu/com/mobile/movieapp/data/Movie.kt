@@ -1,4 +1,4 @@
-package com.example.movieapp.data
+package ddwu.com.mobile.movieapp.data
 
 data class MovieRoot (
     val items: List<Item>,

@@ -1,9 +1,9 @@
-package com.example.movieapp
+package ddwu.com.mobile.movieapp
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.movieapp.databinding.ActivityMainBinding
+import ddwu.com.mobile.movieapp.databinding.ActivityMainBinding
 
 class MainActivity: AppCompatActivity() {
     private val TAG = "MainActivity"
@@ -14,6 +14,11 @@ class MainActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mainBinding.root)
+
+        mainBinding.diaryBtn.setOnClickListener {
+            var intent = Intent(this, DiaryActivity::class.java)
+            startActivity(intent)
+        }
 
         mainBinding.cinemaBtn.setOnClickListener {
             var intent = Intent(this, MapActivity::class.java)

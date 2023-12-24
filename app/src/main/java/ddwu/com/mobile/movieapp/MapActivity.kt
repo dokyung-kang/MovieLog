@@ -1,4 +1,4 @@
-package com.example.movieapp
+package ddwu.com.mobile.movieapp
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -14,7 +14,6 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import com.example.movieapp.databinding.ActivityMapBinding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -31,6 +30,7 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolylineOptions
 import com.google.android.gms.maps.model.StyleSpan
+import ddwu.com.mobile.movieapp.databinding.ActivityMapBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
