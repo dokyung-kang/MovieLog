@@ -1,25 +1,24 @@
 package ddwu.com.mobile.movieapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.appcompat.app.AppCompatActivity
 import ddwu.com.mobile.movieapp.data.Diary
 import ddwu.com.mobile.movieapp.data.DiaryDao
 import ddwu.com.mobile.movieapp.data.DiaryDatabase
 import ddwu.com.mobile.movieapp.databinding.ActivityDetailBinding
+import ddwu.com.mobile.movieapp.databinding.ActivityUpdateBinding
 import ddwu.com.mobile.movieapp.ui.DetailAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
-class DetailActivity : AppCompatActivity() {
+class UpdateDiary : AppCompatActivity()  {
 
-    val TAG = "DetailActivity"
+    val TAG = "UpdateActivity"
 
-    lateinit var binding: ActivityDetailBinding
+    lateinit var binding: ActivityUpdateBinding
     lateinit var diaryAdapter: DetailAdapter
 
     lateinit var db : DiaryDatabase
@@ -27,7 +26,7 @@ class DetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDetailBinding.inflate(layoutInflater)
+        binding = ActivityUpdateBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         db = DiaryDatabase.getDatabase(this)
@@ -47,17 +46,40 @@ class DetailActivity : AppCompatActivity() {
         }
         diaryAdapter.setOnItemLongClickListener(onLongClickListener)
 
-        binding.btnInsert.setOnClickListener{
-            addDiary( Diary(0, binding.etTItle.getText().toString(), binding.etMovieNm.getText().toString(),
-                binding.etCinema.getText().toString(), binding.etCrateDate.getText().toString(),
-                binding.etTime.getText().toString(), binding.etContent.getText().toString()) )
+        binding.btnShow.setOnClickListener{
+            showDiaryByTitle(binding.etTItleU.getText().toString())
         }
 
+        binding.btnUpdate.setOnClickListener {
+            modifyDiary( Diary(0, binding.etTItleU.getText().toString(), binding.etMovieNmU.getText().toString(),
+                binding.etCinemaU.getText().toString(), binding.etCrateDateU.getText().toString(),
+                binding.etTimeU.getText().toString(), binding.etContentU.getText().toString()) )
+        }
+
+        binding.btnDelete.setOnClickListener {
+            removeDiary(  binding.etTItleU.getText().toString() )
+
+        }
     }
 
-    fun addDiary(diary: Diary) {
+    fun modifyDiary(diary: Diary) {
         CoroutineScope(Dispatchers.IO).launch {
-            diaryDao.insertDiary(diary)
+            diaryDao.updateDiary(diary)
+        }
+    }
+
+    fun removeDiary(title: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            diaryDao.deleteDiay(title)
+        }
+    }
+
+    fun showDiaryByTitle(country: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val diarys = diaryDao.getDiaryByTitle(country)
+            for (diary in diarys) {
+                Log.d(TAG, diary.toString())
+            }
         }
     }
 }
