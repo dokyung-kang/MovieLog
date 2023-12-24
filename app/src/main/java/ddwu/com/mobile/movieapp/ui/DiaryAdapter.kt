@@ -30,6 +30,10 @@ class DiaryAdapter(val diarys: List<Diary>) : RecyclerView.Adapter<DiaryAdapter.
             itemLongClickListener?.onItemLongClickListener(it, position)
             true
         }
+        holder.itemBinding.root.setOnClickListener{
+            itemClickListener?.onItemClickListener(it, position)
+            true
+        }
     }
 
     class DiaryViewHolder(val itemBinding: ListDiaryBinding)
@@ -44,6 +48,16 @@ class DiaryAdapter(val diarys: List<Diary>) : RecyclerView.Adapter<DiaryAdapter.
 
     fun setOnItemLongClickListener(listener: OnItemLongClickListener?) {
         itemLongClickListener = listener
+    }
+
+    interface OnItemClickListener {
+        fun onItemClickListener(view: View, pos: Int)
+    }
+
+    var itemClickListener : OnItemClickListener? = null
+
+    fun setOnItemClickListener(listener: OnItemClickListener?) {
+        itemClickListener = listener
     }
 
 }

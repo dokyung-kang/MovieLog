@@ -17,13 +17,13 @@ interface DiaryDao {
     @Insert
     suspend fun insertDiary(vararg diary : Diary)
 
-    @Update
-    suspend fun updateDiary(vararg diary : Diary)
-//    @Query("UPDATE diary_table SET dContent = :dContent WHERE title = :title")
-//    suspend fun updateDiary(title: String, dContent: String)
+    @Query("UPDATE diary_table SET title =:title, movieNm = :movieNm, cimena =:cimena, " +
+            "createDate =:createDate, createTime =:createTime, dContent = :dContent WHERE _id = :diaryId")
+    suspend fun updateDiary(diaryId: Int, title: String, movieNm: String, cimena: String,
+    createDate: String, createTime: String, dContent: String)
 
 //    @Delete
 //    suspend fun deleteFood(food : Food)
-    @Query("DELETE FROM diary_table WHERE title = :title")
-    suspend fun deleteDiay(title: String)
+    @Query("DELETE FROM diary_table WHERE _id = :diaryID")
+    suspend fun deleteDiay(diaryID: Int)
 }

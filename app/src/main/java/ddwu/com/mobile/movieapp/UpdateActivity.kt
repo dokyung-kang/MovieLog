@@ -7,14 +7,13 @@ import androidx.appcompat.app.AppCompatActivity
 import ddwu.com.mobile.movieapp.data.Diary
 import ddwu.com.mobile.movieapp.data.DiaryDao
 import ddwu.com.mobile.movieapp.data.DiaryDatabase
-import ddwu.com.mobile.movieapp.databinding.ActivityDetailBinding
 import ddwu.com.mobile.movieapp.databinding.ActivityUpdateBinding
 import ddwu.com.mobile.movieapp.ui.DetailAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class UpdateDiary : AppCompatActivity()  {
+class UpdateActivity : AppCompatActivity()  {
 
     val TAG = "UpdateActivity"
 
@@ -32,54 +31,38 @@ class UpdateDiary : AppCompatActivity()  {
         db = DiaryDatabase.getDatabase(this)
         diaryDao = db.diaryDao()
 
-
-        /*샘플 데이터, DB 사용 시 DB에서 읽어온 데이터로 대체 필요*/
-        val diarys = ArrayList<Diary>()
-
-        diaryAdapter = DetailAdapter(diarys)
-
-        /*foodAdapter 에 LongClickListener 구현 및 설정*/
-        val onLongClickListener = object: DetailAdapter.OnItemLongClickListener {
-            override fun onItemLongClickListener(view: View, pos: Int) {
-                Log.d(TAG, "Long Click!! $pos")
-            }
-        }
-        diaryAdapter.setOnItemLongClickListener(onLongClickListener)
-
-        binding.btnShow.setOnClickListener{
-            showDiaryByTitle(binding.etTItleU.getText().toString())
-        }
+        val diaryID = intent.getIntExtra("diaryID", 0)
+        binding.etTItleU.setText(intent.getStringExtra("diaryTitle"))
+        binding.etMovieNmU.setText(intent.getStringExtra("diaryMovieNm"))
+        binding.etCinemaU.setText(intent.getStringExtra("diaryCinema"))
+        binding.etCrateDateU.setText(intent.getStringExtra("diaryCreateDate"))
+        binding.etTimeU.setText(intent.getStringExtra("diaryCreateTime"))
+        binding.etContentU.setText(intent.getStringExtra("diaryContent"))
 
         binding.btnUpdate.setOnClickListener {
-            modifyDiary( Diary(0, binding.etTItleU.getText().toString(), binding.etMovieNmU.getText().toString(),
+            modifyDiary( Diary(diaryID, binding.etTItleU.getText().toString(), binding.etMovieNmU.getText().toString(),
                 binding.etCinemaU.getText().toString(), binding.etCrateDateU.getText().toString(),
                 binding.etTimeU.getText().toString(), binding.etContentU.getText().toString()) )
         }
 
         binding.btnDelete.setOnClickListener {
-            removeDiary(  binding.etTItleU.getText().toString() )
+            removeDiary(  diaryID )
 
         }
     }
 
     fun modifyDiary(diary: Diary) {
         CoroutineScope(Dispatchers.IO).launch {
-            diaryDao.updateDiary(diary)
+            diaryDao.updateDiary(diary._id, diary.title.toString(),
+                diary.movieNm.toString(), diary.cimena.toString(),
+                diary.createDate.toString(), diary.createTime.toString(), diary.dContent.toString())
         }
     }
 
-    fun removeDiary(title: String) {
+    fun removeDiary(diaryID: Int) {
         CoroutineScope(Dispatchers.IO).launch {
-            diaryDao.deleteDiay(title)
+            diaryDao.deleteDiay(diaryID)
         }
     }
 
-    fun showDiaryByTitle(country: String) {
-        CoroutineScope(Dispatchers.IO).launch {
-            val diarys = diaryDao.getDiaryByTitle(country)
-            for (diary in diarys) {
-                Log.d(TAG, diary.toString())
-            }
-        }
-    }
 }

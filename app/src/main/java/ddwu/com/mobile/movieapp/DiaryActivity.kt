@@ -56,7 +56,26 @@ class DiaryActivity : AppCompatActivity()  {
                 Log.d(TAG, "Long Click!! $pos")
             }
         }
+
+        val onClickListener = object: DiaryAdapter.OnItemClickListener {
+            override fun onItemClickListener(view: View, pos: Int) {
+                Log.d(TAG, "Short Click!! $pos")
+
+                val intent = Intent(this@DiaryActivity, UpdateActivity::class.java)
+                intent.putExtra("diaryID", diarys[pos]._id)
+                intent.putExtra("diaryTitle", diarys[pos].title)
+                intent.putExtra("diaryMovieNm", diarys[pos].movieNm)
+                intent.putExtra("diaryCinema", diarys[pos].cimena)
+                intent.putExtra("diaryCreateDate", diarys[pos].createDate)
+                intent.putExtra("diaryCreateTime", diarys[pos].createTime)
+                intent.putExtra("diaryContent", diarys[pos].dContent)
+
+                startActivity(intent)
+            }
+        }
+
         diaryAdapter.setOnItemLongClickListener(onLongClickListener)
+        diaryAdapter.setOnItemClickListener(onClickListener)
 
         binding.rvDiarys.adapter = diaryAdapter
 
@@ -81,3 +100,4 @@ class DiaryActivity : AppCompatActivity()  {
     }
 
 }
+
