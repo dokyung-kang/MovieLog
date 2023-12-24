@@ -1,5 +1,6 @@
 package ddwu.com.mobile.movieapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -57,12 +58,16 @@ class UpdateActivity : AppCompatActivity()  {
                 diary.movieNm.toString(), diary.cimena.toString(),
                 diary.createDate.toString(), diary.createTime.toString(), diary.dContent.toString())
         }
+        var intent = Intent(this, DiaryActivity::class.java)
+        startActivity(intent)
     }
 
     fun removeDiary(diaryID: Int) {
         CoroutineScope(Dispatchers.IO).launch {
             diaryDao.deleteDiay(diaryID)
         }
+        var intent = Intent(this, DiaryActivity::class.java)
+        startActivity(intent)
     }
 
 }

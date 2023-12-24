@@ -1,5 +1,6 @@
 package ddwu.com.mobile.movieapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -59,5 +60,7 @@ class DetailActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             diaryDao.insertDiary(diary)
         }
+        var intent = Intent(this, DiaryActivity::class.java)
+        startActivity(intent)
     }
 }
