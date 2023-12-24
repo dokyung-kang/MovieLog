@@ -47,7 +47,6 @@ class SearchActivity : AppCompatActivity()  {
                 override fun onResponse(call: Call<Root>, response: Response<Root>) {
                     if (response.isSuccessful) {
                         val root : Root? = response.body()
-                        Log.d(TAG, "1차 Response" + root.toString())
                         adapter.movies = root?.movieListResult?.movieList
                         adapter.notifyDataSetChanged()
 
