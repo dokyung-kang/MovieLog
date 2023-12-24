@@ -1,10 +1,12 @@
 package ddwu.com.mobile.movieapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
 import ddwu.com.mobile.movieapp.data.Root
 import ddwu.com.mobile.movieapp.databinding.ActivityMovieBinding
 import ddwu.com.mobile.movieapp.network.IMovieOfficeAPIService
@@ -15,21 +17,23 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+
 class SearchActivity : AppCompatActivity()  {
     private val TAG = "Searchctivity"
 
-    lateinit var mainBinding : ActivityMovieBinding
+    lateinit var binding : ActivityMovieBinding
     lateinit var adapter : MovieAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mainBinding = ActivityMovieBinding.inflate(layoutInflater)
-        setContentView(mainBinding.root)
+        binding = ActivityMovieBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         adapter = MovieAdapter()
-        mainBinding.rvMovies.adapter = adapter
-        mainBinding.rvMovies.layoutManager = LinearLayoutManager(this)
-
+        binding.rvMovies.adapter = adapter
+        binding.rvMovies.layoutManager = LinearLayoutManager(this)
+        val dividerItemDecoration = DividerItemDecoration(binding.rvMovies.getContext(), LinearLayoutManager(this).orientation)
+        binding.rvMovies.addItemDecoration(dividerItemDecoration)
 
         val retrofit = Retrofit.Builder()
             .baseUrl(resources.getString(R.string.kobis_url))
@@ -39,8 +43,8 @@ class SearchActivity : AppCompatActivity()  {
         val service = retrofit.create(IMovieOfficeAPIService::class.java)
 
 
-        mainBinding.btnSearch.setOnClickListener {
-            val movieNm = mainBinding.etDate.text.toString()
+        binding.btnSearch.setOnClickListener {
+            val movieNm = binding.etDate.text.toString()
 
             val apiCallback = object: Callback<Root> {
 
@@ -70,6 +74,28 @@ class SearchActivity : AppCompatActivity()  {
             apiCall.enqueue(apiCallback)
 
         }
+
+        val onClickListener = object: MovieAdapter.OnItemClickListener {
+            override fun onItemClickListener(view: View, pos: Int) {
+                Log.d(TAG, "Short Click!! $pos")
+
+                val intent = Intent(this@SearchActivity, MovieActivity::class.java)
+                intent.putExtra("movieCd", adapter.movies!![pos]?.movieCd.toString())
+                intent.putExtra("movieNm", adapter.movies!![pos]?.movieNm.toString())
+                intent.putExtra("movieNmEn", adapter.movies!![pos]?.movieNmEn.toString())
+                intent.putExtra("prdtYear", adapter.movies!![pos]?.prdtYear.toString())
+                intent.putExtra("openDt", adapter.movies!![pos]?.openDt.toString())
+                intent.putExtra("typeNm", adapter.movies!![pos]?.typeNm.toString())
+                intent.putExtra("genreAlt", adapter.movies!![pos]?.genreAlt.toString())
+                intent.putExtra("directors", adapter.movies!![pos]?.directors?.getOrNull(0)?.peopleNm ?: "".toString())
+
+                startActivity(intent)
+            }
+        }
+
+        adapter.setOnItemClickListener(onClickListener)
+
+        binding.rvMovies.adapter = adapter
 
     }
 }

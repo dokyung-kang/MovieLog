@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import ddwu.com.mobile.movieapp.data.Diary
 import ddwu.com.mobile.movieapp.data.DiaryDao
@@ -41,6 +42,8 @@ class DiaryActivity : AppCompatActivity()  {
         binding.rvDiarys.layoutManager = LinearLayoutManager(this).apply {
             orientation = LinearLayoutManager.VERTICAL
         }
+        val dividerItemDecoration = DividerItemDecoration(binding.rvDiarys.getContext(), LinearLayoutManager(this).orientation)
+        binding.rvDiarys.addItemDecoration(dividerItemDecoration)
 
         binding.crateBtn.setOnClickListener {
             var intent = Intent(this, DetailActivity::class.java)
