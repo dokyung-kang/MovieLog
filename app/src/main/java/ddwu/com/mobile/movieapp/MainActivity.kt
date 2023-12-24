@@ -16,7 +16,7 @@ class MainActivity: AppCompatActivity() {
         setContentView(mainBinding.root)
 
         mainBinding.diaryBtn.setOnClickListener {
-            var intent = Intent(this, DetailActivity::class.java)
+            var intent = Intent(this, DiaryActivity::class.java)
             startActivity(intent)
         }
 
