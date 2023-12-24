@@ -4,11 +4,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import ddwu.com.mobile.movieapp.data.Item
+import ddwu.com.mobile.movieapp.data.MovieList
 import ddwu.com.mobile.movieapp.databinding.ListItemBinding
 
-class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieHolder>()  {
-    var movies: List<Item>? = null
+class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieHolder>() {
+    var movies: List<MovieList>? = null
 
     override fun getItemCount(): Int {
         return movies?.size ?: 0
@@ -21,20 +21,7 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieHolder>()  {
 
     override fun onBindViewHolder(holder: MovieHolder, position: Int) {
         holder.itemBinding.tvItem.text = movies?.get(position).toString()
-        holder.itemBinding.clItem.setOnClickListener{
-            clickListener?.onItemClick(it, position)
-        }
     }
 
     class MovieHolder(val itemBinding: ListItemBinding) : RecyclerView.ViewHolder(itemBinding.root)
-
-    interface OnItemClickListner {
-        fun onItemClick(view: View, position: Int)
-    }
-
-    var clickListener: OnItemClickListner? = null
-
-    fun setOnItemClickListener(listener: OnItemClickListner) {
-        this.clickListener = listener
-    }
 }

@@ -20,6 +20,11 @@ class MainActivity: AppCompatActivity() {
             startActivity(intent)
         }
 
+        mainBinding.movieBtn.setOnClickListener {
+            var intent = Intent(this, SearchActivity::class.java)
+            startActivity(intent)
+        }
+
         mainBinding.cinemaBtn.setOnClickListener {
             var intent = Intent(this, MapActivity::class.java)
             startActivity(intent)
