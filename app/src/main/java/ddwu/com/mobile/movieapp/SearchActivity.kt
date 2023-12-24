@@ -71,12 +71,5 @@ class SearchActivity : AppCompatActivity()  {
 
         }
 
-
-        val url = resources.getString(R.string.image_url)
-        Glide.with(this)
-            .load(url)
-            .into(mainBinding.imageView)
-
-
     }
 }

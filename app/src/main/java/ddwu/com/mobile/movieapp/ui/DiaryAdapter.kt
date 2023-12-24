@@ -1,5 +1,6 @@
 package ddwu.com.mobile.movieapp.ui
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +21,11 @@ class DiaryAdapter(val diarys: List<Diary>) : RecyclerView.Adapter<DiaryAdapter.
     }
 
     override fun onBindViewHolder(holder: DiaryViewHolder, position: Int) {
-        holder.itemBinding.tvDiary1st.text = diarys[position].toString()
+        holder.itemBinding.tvDiaryNum.text = diarys[position]._id.toString()
+        holder.itemBinding.tvDiaryTitle.text = diarys[position].title.toString()
+        holder.itemBinding.tvDiaryMovieNm.text = diarys[position].movieNm.toString()
+        holder.itemBinding.tvDiaryDate.text = diarys[position].createDate.toString()
+        Log.d(TAG, diarys[position]._id.toString())
         holder.itemBinding.root.setOnLongClickListener{
             itemLongClickListener?.onItemLongClickListener(it, position)
             true

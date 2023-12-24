@@ -13,7 +13,7 @@ import ddwu.com.mobile.movieapp.data.Diary
 import ddwu.com.mobile.movieapp.data.DiaryDao
 import ddwu.com.mobile.movieapp.data.DiaryDatabase
 import ddwu.com.mobile.movieapp.databinding.ActivityDiaryBinding
-import ddwu.com.mobile.movieapp.ui.DetailAdapter
+import ddwu.com.mobile.movieapp.ui.DiaryAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -23,7 +23,7 @@ class DiaryActivity : AppCompatActivity()  {
     val TAG = "DiaryActivity"
 
     lateinit var binding: ActivityDiaryBinding
-    lateinit var diaryAdapter: DetailAdapter
+    lateinit var diaryAdapter: DiaryAdapter
 
     lateinit var db : DiaryDatabase
     lateinit var diaryDao : DiaryDao
@@ -49,10 +49,9 @@ class DiaryActivity : AppCompatActivity()  {
 
         showAllDiarys()
 
-        diaryAdapter = DetailAdapter(diarys)
+        diaryAdapter = DiaryAdapter(diarys)
 
-        /*foodAdapter 에 LongClickListener 구현 및 설정*/
-        val onLongClickListener = object: DetailAdapter.OnItemLongClickListener {
+        val onLongClickListener = object: DiaryAdapter.OnItemLongClickListener {
             override fun onItemLongClickListener(view: View, pos: Int) {
                 Log.d(TAG, "Long Click!! $pos")
             }
