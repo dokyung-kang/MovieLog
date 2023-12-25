@@ -79,17 +79,25 @@ class SearchActivity : AppCompatActivity()  {
             override fun onItemClickListener(view: View, pos: Int) {
                 Log.d(TAG, "Short Click!! $pos")
 
-                val intent = Intent(this@SearchActivity, MovieActivity::class.java)
-                intent.putExtra("movieCd", adapter.movies!![pos]?.movieCd.toString())
-                intent.putExtra("movieNm", adapter.movies!![pos]?.movieNm.toString())
-                intent.putExtra("movieNmEn", adapter.movies!![pos]?.movieNmEn.toString())
-                intent.putExtra("prdtYear", adapter.movies!![pos]?.prdtYear.toString())
-                intent.putExtra("openDt", adapter.movies!![pos]?.openDt.toString())
-                intent.putExtra("typeNm", adapter.movies!![pos]?.typeNm.toString())
-                intent.putExtra("genreAlt", adapter.movies!![pos]?.genreAlt.toString())
-                intent.putExtra("directors", adapter.movies!![pos]?.directors?.getOrNull(0)?.peopleNm ?: "".toString())
+                val intent2 = Intent(this@SearchActivity, MovieActivity::class.java)
+                intent2.putExtra("movieCd", adapter.movies!![pos]?.movieCd.toString())
+                intent2.putExtra("movieNm", adapter.movies!![pos]?.movieNm.toString())
+                intent2.putExtra("movieNmEn", adapter.movies!![pos]?.movieNmEn.toString())
+                intent2.putExtra("prdtYear", adapter.movies!![pos]?.prdtYear.toString())
+                intent2.putExtra("openDt", adapter.movies!![pos]?.openDt.toString())
+                intent2.putExtra("typeNm", adapter.movies!![pos]?.typeNm.toString())
+                intent2.putExtra("genreAlt", adapter.movies!![pos]?.genreAlt.toString())
+                intent2.putExtra("directors", adapter.movies!![pos]?.directors?.getOrNull(0)?.peopleNm ?: "".toString())
 
-                startActivity(intent)
+                intent2.putExtra("whatType",  intent.getStringExtra("whatType"))
+                intent2.putExtra("writeTitle",  intent.getStringExtra("writeTitle"))
+                intent2.putExtra("writePlace",  intent.getStringExtra("writePlace"))
+                intent2.putExtra("writeMovie",  intent.getStringExtra("writeMovie"))
+                intent2.putExtra("writeDate",  intent.getStringExtra("writeDate"))
+                intent2.putExtra("writeTime",  intent.getStringExtra("writeTime"))
+                intent2.putExtra("writeContent",  intent.getStringExtra("writeContent"))
+
+                startActivity(intent2)
             }
         }
 

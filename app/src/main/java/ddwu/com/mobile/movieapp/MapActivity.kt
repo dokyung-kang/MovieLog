@@ -170,9 +170,16 @@ class MapActivity: AppCompatActivity() {
                     .setTitle("해당 장소를 리뷰로 작성하겠습니까?")
                     .setMessage(it.snippet)
                     .setPositiveButton("예") { _, _ ->
-                        val intent = Intent(this@MapActivity, DetailActivity::class.java)
-                        intent.putExtra("writePlace", it.snippet.toString())
-                        startActivity(intent)
+                        if (intent.getStringExtra("whatType").toString().equals("newWrite")) {
+                            val intent2 = Intent(this@MapActivity, DetailActivity::class.java)
+                            intent2.putExtra("writePlace", it.snippet.toString())
+                            intent2.putExtra("writeMovie",  intent.getStringExtra("writeMovie"))
+                            intent2.putExtra("writeTitle",  intent.getStringExtra("writeTitle"))
+                            intent2.putExtra("writeDate",  intent.getStringExtra("writeDate"))
+                            intent2.putExtra("writeTime",  intent.getStringExtra("writeTime"))
+                            intent2.putExtra("writeContent",  intent.getStringExtra("writeContent"))
+                            startActivity(intent2)
+                        }
                     }
                     .setNegativeButton("아니오") { dialog, _ ->
                         dialog.dismiss() 

@@ -33,15 +33,31 @@ class DetailActivity : AppCompatActivity() {
         db = DiaryDatabase.getDatabase(this)
         diaryDao = db.diaryDao()
 
+        binding.etTItle.setText(intent.getStringExtra("writeTitle"))
         binding.etCinema.setText(intent.getStringExtra("writePlace"))
         binding.etMovieNm.setText(intent.getStringExtra("writeMovie"))
+        binding.etCrateDate.setText(intent.getStringExtra("writeDate"))
+        binding.etTime.setText(intent.getStringExtra("writeTime"))
+        binding.etContent.setText(intent.getStringExtra("writeContent"))
 
         binding.findMNm.setOnClickListener {
             var intent = Intent(this, SearchActivity::class.java)
+            intent.putExtra("whatType",  "newWrite")
+            intent.putExtra("writeTitle",  binding.etTItle.text.toString())
+            intent.putExtra("writePlace",  binding.etCinema.text.toString())
+            intent.putExtra("writeDate",  binding.etCrateDate.text.toString())
+            intent.putExtra("writeTime",  binding.etTime.text.toString())
+            intent.putExtra("writeContent",  binding.etContent.text.toString())
             startActivity(intent)
         }
         binding.findCi.setOnClickListener {
             var intent = Intent(this, MapActivity::class.java)
+            intent.putExtra("whatType",  "newWrite")
+            intent.putExtra("writeTitle",  binding.etTItle.text.toString())
+            intent.putExtra("writeMovie",  binding.etMovieNm.text.toString())
+            intent.putExtra("writeDate",  binding.etCrateDate.text.toString())
+            intent.putExtra("writeTime",  binding.etTime.text.toString())
+            intent.putExtra("writeContent",  binding.etContent.text.toString())
             startActivity(intent)
         }
 

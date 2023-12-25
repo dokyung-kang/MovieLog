@@ -35,9 +35,16 @@ class MovieActivity : AppCompatActivity()  {
         binding.tvMov8.setText(intent.getStringExtra("directors"))
 
         binding.mvBtn.setOnClickListener {
-            var intent = Intent(this, DetailActivity::class.java)
-            intent.putExtra("writeMovie",  binding.tvMov2.text.toString())
-            startActivity(intent)
+            if (intent.getStringExtra("whatType").toString().equals("newWrite")){
+                var intent2 = Intent(this, DetailActivity::class.java)
+                intent2.putExtra("writeMovie",  binding.tvMov2.text.toString())
+                intent2.putExtra("writeTitle",  intent.getStringExtra("writeTitle"))
+                intent2.putExtra("writePlace",  intent.getStringExtra("writePlace"))
+                intent2.putExtra("writeDate",  intent.getStringExtra("writeDate"))
+                intent2.putExtra("writeTime",  intent.getStringExtra("writeTime"))
+                intent2.putExtra("writeContent",  intent.getStringExtra("writeContent"))
+                startActivity(intent2)
+            }
         }
     }
 }
