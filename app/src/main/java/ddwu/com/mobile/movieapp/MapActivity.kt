@@ -180,7 +180,7 @@ class MapActivity: AppCompatActivity() {
                             intent2.putExtra("writeContent",  intent.getStringExtra("writeContent"))
                             startActivity(intent2)
                         }
-                        if (intent.getStringExtra("whatType").toString().equals("oldWrite")) {
+                        else if (intent.getStringExtra("whatType").toString().equals("oldWrite")) {
                             val intent2 = Intent(this@MapActivity, UpdateActivity::class.java)
                             intent2.putExtra("diaryID",  intent.getIntExtra("diaryID", 0))
                             intent2.putExtra("diaryTitle",  intent.getStringExtra("diaryTitle"))
@@ -189,6 +189,11 @@ class MapActivity: AppCompatActivity() {
                             intent2.putExtra("diaryCreateDate",  intent.getStringExtra("diaryCreateDate"))
                             intent2.putExtra("diaryCreateTime",  intent.getStringExtra("diaryCreateTime"))
                             intent2.putExtra("diaryContent",  intent.getStringExtra("diaryContent"))
+                            startActivity(intent2)
+                        }
+                        else{
+                            val intent2 = Intent(this@MapActivity, DetailActivity::class.java)
+                            intent2.putExtra("writePlace", it.snippet.toString())
                             startActivity(intent2)
                         }
                     }

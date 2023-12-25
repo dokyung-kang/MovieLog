@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/diaryBtn"
         style="@style/Widget.AppCompat.Button"
         android:layout_width="250dp"
@@ -14,12 +14,14 @@
         android:text="영화 후기 기록하기"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:background="@color/black"
+        android:textColor="@color/blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/movieBtn"
         style="@style/Widget.AppCompat.Button"
         android:layout_width="250dp"
@@ -29,13 +31,15 @@
         android:text="영화 찾기"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:background="@color/black"
+        android:textColor="@color/blue"
         app:layout_constraintBottom_toTopOf="@+id/cinemaBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/diaryBtn" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/cinemaBtn"
         style="@style/Widget.AppCompat.Button"
         android:layout_width="250dp"
@@ -44,6 +48,8 @@
         android:text="영화관 찾기"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:background="@color/black"
+        android:textColor="@color/blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"

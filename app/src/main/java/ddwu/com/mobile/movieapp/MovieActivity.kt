@@ -45,7 +45,7 @@ class MovieActivity : AppCompatActivity()  {
                 intent2.putExtra("writeContent",  intent.getStringExtra("writeContent"))
                 startActivity(intent2)
             }
-            if (intent.getStringExtra("whatType").toString().equals("oldWrite")){
+            else if (intent.getStringExtra("whatType").toString().equals("oldWrite")){
                 var intent2 = Intent(this, UpdateActivity::class.java)
                 intent2.putExtra("diaryMovieNm",  binding.tvMov2.text.toString())
                 intent2.putExtra("diaryID",  intent.getIntExtra("diaryID", 0))
@@ -56,6 +56,16 @@ class MovieActivity : AppCompatActivity()  {
                 intent2.putExtra("diaryContent",  intent.getStringExtra("diaryContent"))
                 startActivity(intent2)
             }
+            else{
+                var intent2 = Intent(this, DetailActivity::class.java)
+                intent2.putExtra("writeMovie",  binding.tvMov2.text.toString())
+                startActivity(intent2)
+            }
+        }
+
+        binding.mvBtn2.setOnClickListener {
+            var intent2 = Intent(this, SearchActivity::class.java)
+            startActivity(intent2)
         }
     }
 }
