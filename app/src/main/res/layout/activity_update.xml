@@ -181,4 +181,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/findMNmU"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="영화 찾기"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/findCiU"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="영화관 찾기"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

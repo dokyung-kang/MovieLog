@@ -180,6 +180,17 @@ class MapActivity: AppCompatActivity() {
                             intent2.putExtra("writeContent",  intent.getStringExtra("writeContent"))
                             startActivity(intent2)
                         }
+                        if (intent.getStringExtra("whatType").toString().equals("oldWrite")) {
+                            val intent2 = Intent(this@MapActivity, UpdateActivity::class.java)
+                            intent2.putExtra("diaryID",  intent.getStringExtra("diaryID"))
+                            intent2.putExtra("diaryTitle",  intent.getStringExtra("diaryTitle"))
+                            intent2.putExtra("diaryMovieNm",  intent.getStringExtra("diaryMovieNm"))
+                            intent2.putExtra("diaryCinema",  it.snippet.toString())
+                            intent2.putExtra("diaryCreateDate",  intent.getStringExtra("diaryCreateDate"))
+                            intent2.putExtra("diaryCreateTime",  intent.getStringExtra("diaryCreateTime"))
+                            intent2.putExtra("diaryContent",  intent.getStringExtra("diaryContent"))
+                            startActivity(intent2)
+                        }
                     }
                     .setNegativeButton("아니오") { dialog, _ ->
                         dialog.dismiss() 

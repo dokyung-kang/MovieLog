@@ -90,12 +90,21 @@ class SearchActivity : AppCompatActivity()  {
                 intent2.putExtra("directors", adapter.movies!![pos]?.directors?.getOrNull(0)?.peopleNm ?: "".toString())
 
                 intent2.putExtra("whatType",  intent.getStringExtra("whatType"))
+
                 intent2.putExtra("writeTitle",  intent.getStringExtra("writeTitle"))
                 intent2.putExtra("writePlace",  intent.getStringExtra("writePlace"))
                 intent2.putExtra("writeMovie",  intent.getStringExtra("writeMovie"))
                 intent2.putExtra("writeDate",  intent.getStringExtra("writeDate"))
                 intent2.putExtra("writeTime",  intent.getStringExtra("writeTime"))
                 intent2.putExtra("writeContent",  intent.getStringExtra("writeContent"))
+
+                intent2.putExtra("diaryID",  intent.getStringExtra("diaryID"))
+                intent2.putExtra("diaryTitle",  intent.getStringExtra("diaryTitle"))
+                intent2.putExtra("diaryMovieNm",  intent.getStringExtra("diaryMovieNm"))
+                intent2.putExtra("diaryCinema",  intent.getStringExtra("diaryCinema"))
+                intent2.putExtra("diaryCreateDate",  intent.getStringExtra("diaryCreateDate"))
+                intent2.putExtra("diaryCreateTime",  intent.getStringExtra("diaryCreateTime"))
+                intent2.putExtra("diaryContent",  intent.getStringExtra("diaryContent"))
 
                 startActivity(intent2)
             }

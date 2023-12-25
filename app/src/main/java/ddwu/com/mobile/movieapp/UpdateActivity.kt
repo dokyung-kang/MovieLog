@@ -40,6 +40,29 @@ class UpdateActivity : AppCompatActivity()  {
         binding.etTimeU.setText(intent.getStringExtra("diaryCreateTime"))
         binding.etContentU.setText(intent.getStringExtra("diaryContent"))
 
+        binding.findMNmU.setOnClickListener {
+            var intent2 = Intent(this, SearchActivity::class.java)
+            intent2.putExtra("whatType",  "oldWrite")
+            intent2.putExtra("diaryID",  diaryID)
+            intent2.putExtra("diaryTitle",  binding.etTItleU.text.toString())
+            intent2.putExtra("diaryCinema",  binding.etCinemaU.text.toString())
+            intent2.putExtra("diaryCreateDate",  binding.etCrateDateU.text.toString())
+            intent2.putExtra("diaryCreateTime",  binding.etTimeU.text.toString())
+            intent2.putExtra("diaryContent",  binding.etContentU.text.toString())
+            startActivity(intent2)
+        }
+        binding.findCiU.setOnClickListener {
+            var intent2 = Intent(this, MapActivity::class.java)
+            intent2.putExtra("whatType",  "oldWrite")
+            intent2.putExtra("diaryID",  diaryID)
+            intent2.putExtra("diaryTitle",  binding.etTItleU.text.toString())
+            intent2.putExtra("diaryMovieNm",  binding.etMovieNmU.text.toString())
+            intent2.putExtra("diaryCreateDate",  binding.etCrateDateU.text.toString())
+            intent2.putExtra("diaryCreateTime",  binding.etTimeU.text.toString())
+            intent2.putExtra("diaryContent",  binding.etContentU.text.toString())
+            startActivity(intent2)
+        }
+
         binding.btnUpdate.setOnClickListener {
             modifyDiary( Diary(diaryID, binding.etTItleU.getText().toString(), binding.etMovieNmU.getText().toString(),
                 binding.etCinemaU.getText().toString(), binding.etCrateDateU.getText().toString(),
