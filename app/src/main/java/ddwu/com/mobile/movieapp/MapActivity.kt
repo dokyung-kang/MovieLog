@@ -246,7 +246,7 @@ class MapActivity: AppCompatActivity() {
             == PackageManager.PERMISSION_GRANTED
             && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
             == PackageManager.PERMISSION_GRANTED) {
-//            showData("Permissions are already granted")  // textView에 출력
+                Toast.makeText(this@MapActivity, "Permissions are already granted", Toast.LENGTH_SHORT).show()
         } else {
             locationPermissionRequest.launch(arrayOf(
                 Manifest.permission.ACCESS_FINE_LOCATION,
@@ -261,14 +261,14 @@ class MapActivity: AppCompatActivity() {
             permissions ->
         when {
             permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
-//                showData("FINE_LOCATION is granted")
+                Toast.makeText(this@MapActivity, "FINE_LOCATION is granted", Toast.LENGTH_SHORT).show()
             }
 
             permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
-//                showData("COARSE_LOCATION is granted")
+                Toast.makeText(this@MapActivity, "COARSE_LOCATION is granted", Toast.LENGTH_SHORT).show()
             }
             else -> {
-//                showData("Location permissions are required")
+                Toast.makeText(this@MapActivity, "Location permissions are required", Toast.LENGTH_SHORT).show()
             }
         }
     }
