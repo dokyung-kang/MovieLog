@@ -15,6 +15,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -156,12 +157,30 @@ class MapActivity: AppCompatActivity() {
             Log.d(TAG, "GoogleMap is ready")
 
             googleMap.setOnMarkerClickListener {
-                Toast.makeText(this@MapActivity, it.tag.toString(), Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this@MapActivity, it.tag.toString(), Toast.LENGTH_SHORT).show()
                 false
             }
 
             googleMap.setOnMapClickListener { latLng ->
-                Toast.makeText(this@MapActivity, latLng.toString(), Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this@MapActivity, latLng.toString(), Toast.LENGTH_SHORT).show()
+            }
+
+            googleMap.setOnInfoWindowClickListener {
+                val alertDialog = AlertDialog.Builder(this@MapActivity)
+                    .setTitle("해당 장소를 리뷰로 작성하겠습니까?")
+                    .setMessage(it.snippet)
+                    .setPositiveButton("예") { _, _ ->
+                        val intent = Intent(this@MapActivity, DetailActivity::class.java)
+                        intent.putExtra("writePlace", it.snippet.toString())
+                        startActivity(intent)
+                    }
+                    .setNegativeButton("아니오") { dialog, _ ->
+                        dialog.dismiss() 
+                    }
+                    .create()
+
+                alertDialog.show()
+                true
             }
         }
     }
@@ -170,7 +189,7 @@ class MapActivity: AppCompatActivity() {
     /*마커 추가*/
     fun addMarker(targetLoc: LatLng) {  // LatLng(37.606320, 127.041808)
         centerMarker?.remove()
-        val newLoca = geocoder.getFromLocation(targetLoc.latitude, targetLoc.longitude, 1)
+        val newLoca = geocoder.getFromLocation(targetLoc.latitude, targetLoc.longitude, 5)
         val markerOptions: MarkerOptions = MarkerOptions()
         markerOptions.position(targetLoc)
             .title("위치")
