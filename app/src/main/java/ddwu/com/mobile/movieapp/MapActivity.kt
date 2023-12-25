@@ -109,7 +109,7 @@ class MapActivity: AppCompatActivity() {
         mapBinding.btnPermit.setOnClickListener {
             checkPermissions()
 //            addMarker(LatLng(37.606320, 127.041808))
-            drawLine()
+//            drawLine()
         }
 
         mapBinding.btnLastLoc.setOnClickListener {
@@ -165,40 +165,24 @@ class MapActivity: AppCompatActivity() {
 
     /*마커 추가*/
     fun addMarker(targetLoc: LatLng) {  // LatLng(37.606320, 127.041808)
+        centerMarker?.remove()
         val markerOptions: MarkerOptions = MarkerOptions()
         markerOptions.position(targetLoc)
             .title("마커 제목")
             .snippet("마커 말풍선")
             .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
-            .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher))
 
         centerMarker = googleMap.addMarker(markerOptions)
         centerMarker?.showInfoWindow()
         centerMarker?.tag = "database_id"
     }
 
-
-    /*선 추가*/
-    fun drawLine() {
-
-        val PolylineOptions = PolylineOptions()
-            .addSpan(StyleSpan(Color.RED))
-            .add(LatLng(37.604151, 127.042453))
-            .add(LatLng(37.605347, 127.041207))
-            .add(LatLng(37.606038, 127.041344))
-            .add(LatLng(37.606220, 127.041674))
-            .add(LatLng(37.606631, 127.041595))
-            .add(LatLng(37.606823, 127.042380))
-
-        val line = googleMap.addPolyline((PolylineOptions))
-    }
-
-
     /*위치 정보 수신 시 수행할 동작을 정의하는 Callback*/
     val locCallback : LocationCallback = object : LocationCallback() {
         @SuppressLint("NewApi")
         override fun onLocationResult(locResult: LocationResult) {
             currentLoc = locResult.locations.get(0)
+            addMarker(LatLng(currentLoc.latitude, currentLoc.longitude))
             geocoder.getFromLocation(currentLoc.latitude, currentLoc.longitude, 5) { addresses ->
                 CoroutineScope(Dispatchers.Main).launch {
                     showData("위도: ${currentLoc.latitude}, 경도: ${currentLoc.longitude}")
@@ -209,14 +193,6 @@ class MapActivity: AppCompatActivity() {
             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(targetLoc, 17F))
         }
     }
-
-    /*API 33 이전 사용 방식*/
-//            CoroutineScope(Dispatchers.Main).launch {
-//                val addresses = geocoder.getFromLocation(currentLoc.latitude, currentLoc.longitude, 5)
-//                showData("위도: ${currentLoc.latitude}, 경도: ${currentLoc.longitude}")
-//                showData(addresses?.get(0)?.getAddressLine(0).toString())
-//            }
-
 
     /*위치 정보 수신 설정*/
     val locRequest = LocationRequest.Builder(5000)
