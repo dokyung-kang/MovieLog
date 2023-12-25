@@ -14,6 +14,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -30,10 +31,18 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolylineOptions
 import com.google.android.gms.maps.model.StyleSpan
+import ddwu.com.mobile.movieapp.data.PlaceRoot
 import ddwu.com.mobile.movieapp.databinding.ActivityMapBinding
+import ddwu.com.mobile.movieapp.network.IPlaceAPIService
+import ddwu.com.mobile.movieapp.ui.PlaceAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.Locale
 
 class MapActivity: AppCompatActivity() {
@@ -47,6 +56,7 @@ class MapActivity: AppCompatActivity() {
     private lateinit var fusedLocationClient : FusedLocationProviderClient
     private lateinit var geocoder : Geocoder
     private lateinit var currentLoc : Location
+    lateinit var adapter : PlaceAdapter
 
     private lateinit var googleMap : GoogleMap
     var centerMarker : Marker? = null
@@ -55,6 +65,43 @@ class MapActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(mapBinding.root)
+
+        adapter = PlaceAdapter()
+        mapBinding.rvPlaces.adapter = adapter
+        mapBinding.rvPlaces.layoutManager = LinearLayoutManager(this)
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl(resources.getString(R.string.naver_api_url))
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val service = retrofit.create(IPlaceAPIService::class.java)
+
+
+        mapBinding.btnSearch2.setOnClickListener {
+            val keyword = mapBinding.etKeyword.text.toString()
+
+            val apiCall = service.getPlacesByKeyword(
+                resources.getString(R.string.client_id),
+                resources.getString(R.string.client_secret),
+                keyword
+            )
+
+            apiCall.enqueue(
+                object: Callback<PlaceRoot> {
+                    override fun onResponse(call: Call<PlaceRoot>, response: Response<PlaceRoot>) {
+                        val placeRoot = response.body()
+                        adapter.places = placeRoot?.items
+                        adapter.notifyDataSetChanged()
+                    }
+
+                    override fun onFailure(call: Call<PlaceRoot>, t: Throwable) {
+                    }
+
+                }
+            )
+        }
+
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         geocoder = Geocoder(this, Locale.getDefault())
         getLastLocation()   // 최종위치 확인
