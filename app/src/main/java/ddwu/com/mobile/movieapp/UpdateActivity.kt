@@ -64,14 +64,18 @@ class UpdateActivity : AppCompatActivity()  {
         }
 
         binding.btnUpdate.setOnClickListener {
-            modifyDiary( Diary(diaryID, binding.etTItleU.getText().toString(), binding.etMovieNmU.getText().toString(),
-                binding.etCinemaU.getText().toString(), binding.etCrateDateU.getText().toString(),
-                binding.etTimeU.getText().toString(), binding.etContentU.getText().toString()) )
+            modifyDiary( Diary(diaryID, binding.etTItleU.text.toString(), binding.etMovieNmU.text.toString(),
+                binding.etCinemaU.text.toString(), binding.etCrateDateU.text.toString(),
+                binding.etTimeU.text.toString(), binding.etContentU.text.toString()) )
         }
 
         binding.btnDelete.setOnClickListener {
             removeDiary(  diaryID )
+        }
 
+        binding.btnCancelU.setOnClickListener {
+            var intent = Intent(this, DiaryActivity::class.java)
+            startActivity(intent)
         }
     }
 

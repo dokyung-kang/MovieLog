@@ -98,7 +98,7 @@ class SearchActivity : AppCompatActivity()  {
                 intent2.putExtra("writeTime",  intent.getStringExtra("writeTime"))
                 intent2.putExtra("writeContent",  intent.getStringExtra("writeContent"))
 
-                intent2.putExtra("diaryID",  intent.getStringExtra("diaryID"))
+                intent2.putExtra("diaryID",  intent.getIntExtra("diaryID", 0))
                 intent2.putExtra("diaryTitle",  intent.getStringExtra("diaryTitle"))
                 intent2.putExtra("diaryMovieNm",  intent.getStringExtra("diaryMovieNm"))
                 intent2.putExtra("diaryCinema",  intent.getStringExtra("diaryCinema"))

@@ -182,7 +182,7 @@ class MapActivity: AppCompatActivity() {
                         }
                         if (intent.getStringExtra("whatType").toString().equals("oldWrite")) {
                             val intent2 = Intent(this@MapActivity, UpdateActivity::class.java)
-                            intent2.putExtra("diaryID",  intent.getStringExtra("diaryID"))
+                            intent2.putExtra("diaryID",  intent.getIntExtra("diaryID", 0))
                             intent2.putExtra("diaryTitle",  intent.getStringExtra("diaryTitle"))
                             intent2.putExtra("diaryMovieNm",  intent.getStringExtra("diaryMovieNm"))
                             intent2.putExtra("diaryCinema",  it.snippet.toString())

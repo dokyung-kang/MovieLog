@@ -50,6 +50,11 @@ class DiaryActivity : AppCompatActivity()  {
             startActivity(intent)
         }
 
+        binding.backBtn.setOnClickListener {
+            var intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
         showAllDiarys()
 
         diaryAdapter = DiaryAdapter(diarys)

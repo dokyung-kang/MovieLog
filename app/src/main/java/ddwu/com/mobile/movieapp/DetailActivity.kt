@@ -67,6 +67,11 @@ class DetailActivity : AppCompatActivity() {
                 binding.etTime.getText().toString(), binding.etContent.getText().toString()) )
         }
 
+        binding.btnCancel.setOnClickListener {
+            var intent = Intent(this, DiaryActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 
     fun addDiary(diary: Diary) {
