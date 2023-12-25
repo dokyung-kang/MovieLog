@@ -33,5 +33,11 @@ class MovieActivity : AppCompatActivity()  {
         binding.tvMov6.setText(intent.getStringExtra("typeNm"))
         binding.tvMov7.setText(intent.getStringExtra("genreAlt"))
         binding.tvMov8.setText(intent.getStringExtra("directors"))
+
+        binding.mvBtn.setOnClickListener {
+            var intent = Intent(this, DetailActivity::class.java)
+            intent.putExtra("writeMovie",  binding.tvMov2.text.toString())
+            startActivity(intent)
+        }
     }
 }

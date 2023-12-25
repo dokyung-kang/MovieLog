@@ -34,6 +34,16 @@ class DetailActivity : AppCompatActivity() {
         diaryDao = db.diaryDao()
 
         binding.etCinema.setText(intent.getStringExtra("writePlace"))
+        binding.etMovieNm.setText(intent.getStringExtra("writeMovie"))
+
+        binding.findMNm.setOnClickListener {
+            var intent = Intent(this, SearchActivity::class.java)
+            startActivity(intent)
+        }
+        binding.findCi.setOnClickListener {
+            var intent = Intent(this, MapActivity::class.java)
+            startActivity(intent)
+        }
 
         binding.btnInsert.setOnClickListener{
             addDiary( Diary(0, binding.etTItle.getText().toString(), binding.etMovieNm.getText().toString(),
