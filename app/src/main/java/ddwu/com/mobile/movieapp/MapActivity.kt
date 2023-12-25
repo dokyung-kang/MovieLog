@@ -5,15 +5,18 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
+import android.location.Address
 import android.location.Geocoder
 import android.location.Location
 import android.net.Uri
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
@@ -69,6 +72,8 @@ class MapActivity: AppCompatActivity() {
         adapter = PlaceAdapter()
         mapBinding.rvPlaces.adapter = adapter
         mapBinding.rvPlaces.layoutManager = LinearLayoutManager(this)
+        val dividerItemDecoration = DividerItemDecoration(mapBinding.rvPlaces.getContext(), LinearLayoutManager(this).orientation)
+        mapBinding.rvPlaces.addItemDecoration(dividerItemDecoration)
 
         val retrofit = Retrofit.Builder()
             .baseUrl(resources.getString(R.string.naver_api_url))
@@ -84,7 +89,8 @@ class MapActivity: AppCompatActivity() {
             val apiCall = service.getPlacesByKeyword(
                 resources.getString(R.string.client_id),
                 resources.getString(R.string.client_secret),
-                keyword
+                keyword,
+                5
             )
 
             apiCall.enqueue(
@@ -94,7 +100,6 @@ class MapActivity: AppCompatActivity() {
                         adapter.places = placeRoot?.items
                         adapter.notifyDataSetChanged()
                     }
-
                     override fun onFailure(call: Call<PlaceRoot>, t: Throwable) {
                     }
 
@@ -112,10 +117,6 @@ class MapActivity: AppCompatActivity() {
 //            drawLine()
         }
 
-        mapBinding.btnLastLoc.setOnClickListener {
-            getLastLocation()
-        }
-
         mapBinding.btnLocStart.setOnClickListener {
             startLocUpdates()
         }
@@ -124,23 +125,26 @@ class MapActivity: AppCompatActivity() {
             fusedLocationClient.removeLocationUpdates(locCallback)
         }
 
-
-        mapBinding.btnLocTitle.setOnClickListener {
-            geocoder.getFromLocation(37.601025, 127.04153, 5) { addresses ->
-                CoroutineScope(Dispatchers.Main).launch {
-                    showData("위도: ${currentLoc.latitude}, 경도: ${currentLoc.longitude}")
-                    showData(addresses.get(0).getAddressLine(0).toString())
-                }
-            }
-        }
-
-        showData("Geocoder isEnabled: ${Geocoder.isPresent()}")
-
         val mapFragment: SupportMapFragment
                 = supportFragmentManager.findFragmentById(R.id.map)
                 as SupportMapFragment
 
         mapFragment.getMapAsync (mapReadyCallback)
+
+        val onClickListener = object: PlaceAdapter.OnItemClickListner {
+            override fun onItemClick(view: View, position: Int) {
+                val selectedPlace = adapter.places?.get(position)
+                val location = selectedPlace?.roadAddress
+                val newLoca = geocoder.getFromLocationName(location.toString(), 1)
+                addMarker(LatLng(newLoca?.get(0)!!.latitude, newLoca?.get(0)!!.longitude))
+                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(newLoca?.get(0)!!.latitude, newLoca?.get(0)!!.longitude), 17F))
+
+            }
+        }
+
+        adapter.setOnItemClickListener(onClickListener)
+
+        mapBinding.rvPlaces.adapter = adapter
 
     }
 
@@ -185,8 +189,8 @@ class MapActivity: AppCompatActivity() {
             addMarker(LatLng(currentLoc.latitude, currentLoc.longitude))
             geocoder.getFromLocation(currentLoc.latitude, currentLoc.longitude, 5) { addresses ->
                 CoroutineScope(Dispatchers.Main).launch {
-                    showData("위도: ${currentLoc.latitude}, 경도: ${currentLoc.longitude}")
-                    showData(addresses?.get(0)?.getAddressLine(0).toString())
+//                    showData("위도: ${currentLoc.latitude}, 경도: ${currentLoc.longitude}")
+//                    showData(addresses?.get(0)?.getAddressLine(0).toString())
                 }
             }
             val targetLoc: LatLng = LatLng(currentLoc.latitude, currentLoc.longitude)
@@ -223,7 +227,7 @@ class MapActivity: AppCompatActivity() {
     private fun getLastLocation() {
         fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
             if (location != null) {
-                showData(location.toString())
+//                showData(location.toString())
                 currentLoc = location
             } else {
                 currentLoc = Location("기본 위치")      // Last Location 이 null 경우 기본으로 설정
@@ -237,31 +241,12 @@ class MapActivity: AppCompatActivity() {
     }
 
 
-    fun callExternalMap() {
-        val locLatLng   // 위도/경도 정보로 지도 요청 시
-                = String.format("geo:%f,%f?z=%d", 37.606320, 127.041808, 17)
-        val locName     // 위치명으로 지도 요청 시
-                = "https://www.google.co.kr/maps/place/" + "Hawolgok-dong"
-        val route       // 출발-도착 정보 요청 시
-                = String.format("https://www.google.co.kr/maps?saddr=%f,%f&daddr=%f,%f",
-            37.606320, 127.041808, 37.601925, 127.041530)
-        val uri = Uri.parse(locLatLng)
-        val intent = Intent(Intent.ACTION_VIEW, uri)
-        startActivity(intent)
-    }
-
-
-    private fun showData(data : String) {
-        mapBinding.tvData.setText(mapBinding.tvData.text.toString() + "\n${data}")
-    }
-
-
     fun checkPermissions () {
         if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
             == PackageManager.PERMISSION_GRANTED
             && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
             == PackageManager.PERMISSION_GRANTED) {
-            showData("Permissions are already granted")  // textView에 출력
+//            showData("Permissions are already granted")  // textView에 출력
         } else {
             locationPermissionRequest.launch(arrayOf(
                 Manifest.permission.ACCESS_FINE_LOCATION,
@@ -276,14 +261,14 @@ class MapActivity: AppCompatActivity() {
             permissions ->
         when {
             permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
-                showData("FINE_LOCATION is granted")
+//                showData("FINE_LOCATION is granted")
             }
 
             permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
-                showData("COARSE_LOCATION is granted")
+//                showData("COARSE_LOCATION is granted")
             }
             else -> {
-                showData("Location permissions are required")
+//                showData("Location permissions are required")
             }
         }
     }

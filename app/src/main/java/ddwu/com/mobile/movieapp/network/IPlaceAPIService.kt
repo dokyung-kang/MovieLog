@@ -12,5 +12,6 @@ interface IPlaceAPIService {
         @Header("X-Naver-Client-Id") clientId: String,
         @Header("X-Naver-Client-Secret") clientSecret: String,
         @Query("query") keyword: String,
+        @Query("display") display: Int,
     )  : Call<PlaceRoot>
 }

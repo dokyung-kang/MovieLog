@@ -7,7 +7,6 @@ data class PlaceRoot (
 
 data class Item (
         val title: String,
-        val description: String,
-        val address: String,
+        val link: String,
         val roadAddress: String,
     )

@@ -21,9 +21,8 @@ class PlaceAdapter: RecyclerView.Adapter<PlaceAdapter.PlaceHolder>() {
 
     override fun onBindViewHolder(holder: PlaceHolder, position: Int) {
         holder.itemBinding.pTitle.text = places?.get(position)?.title.toString()
-        holder.itemBinding.pAdd.text = places?.get(position)?.address.toString()
         holder.itemBinding.pLaod.text = places?.get(position)?.roadAddress.toString()
-        holder.itemBinding.pDes.text = places?.get(position)?.description.toString()
+        holder.itemBinding.pDes.text = places?.get(position)?.link.toString()
         holder.itemBinding.pItem.setOnClickListener{
             clickListener?.onItemClick(it, position)
         }
