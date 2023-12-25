@@ -170,15 +170,16 @@ class MapActivity: AppCompatActivity() {
     /*마커 추가*/
     fun addMarker(targetLoc: LatLng) {  // LatLng(37.606320, 127.041808)
         centerMarker?.remove()
+        val newLoca = geocoder.getFromLocation(targetLoc.latitude, targetLoc.longitude, 1)
         val markerOptions: MarkerOptions = MarkerOptions()
         markerOptions.position(targetLoc)
-            .title("마커 제목")
-            .snippet("마커 말풍선")
+            .title("위치")
+            .snippet(newLoca?.get(0)?.getAddressLine(0).toString())
             .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
 
         centerMarker = googleMap.addMarker(markerOptions)
         centerMarker?.showInfoWindow()
-        centerMarker?.tag = "database_id"
+//        centerMarker?.tag = "database_id"
     }
 
     /*위치 정보 수신 시 수행할 동작을 정의하는 Callback*/
