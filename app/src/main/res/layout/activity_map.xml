@@ -22,12 +22,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:text="검색"
         android:background="@color/black"
+        android:text="검색"
         android:textColor="@color/blue"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.647"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/etKeyword"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -64,10 +64,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="위치 확인 시작"
+        android:layout_marginEnd="8dp"
         android:background="@color/black"
+        android:text="위치 확인 시작"
         android:textColor="@color/blue"
         android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/btnLocStop"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/btnPermit"
         app:layout_constraintTop_toBottomOf="@+id/etKeyword" />
 
@@ -76,15 +79,13 @@
         style="@style/Widget.AppCompat.Button"
         android:layout_width="135dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:text="위치 확인 중지"
         android:background="@color/black"
+        android:text="위치 확인 중지"
         android:textColor="@color/blue"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnLocStart"
         app:layout_constraintTop_toBottomOf="@+id/etKeyword" />
 
     <fragment
