@@ -1,4 +1,4 @@
-package ddwu.com.mobile.movieapp
+package ddwu.com.mobile.movielog
 
 import org.junit.Test
 

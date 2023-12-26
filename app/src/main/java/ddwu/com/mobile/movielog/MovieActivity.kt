@@ -1,18 +1,9 @@
-package ddwu.com.mobile.movieapp
+package ddwu.com.mobile.movielog
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import ddwu.com.mobile.movieapp.data.Diary
-import ddwu.com.mobile.movieapp.data.DiaryDao
-import ddwu.com.mobile.movieapp.data.DiaryDatabase
-import ddwu.com.mobile.movieapp.databinding.ActivityMovieinfoBinding
-import ddwu.com.mobile.movieapp.ui.MovieAdapter
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import ddwu.com.mobile.movielog.databinding.ActivityMovieinfoBinding
 
 class MovieActivity : AppCompatActivity()  {
     val TAG = "MovieActivity"

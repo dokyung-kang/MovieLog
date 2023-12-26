@@ -1,11 +1,11 @@
-package ddwu.com.mobile.movieapp.ui
+package ddwu.com.mobile.movielog.ui
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import ddwu.com.mobile.movieapp.data.Item
-import ddwu.com.mobile.movieapp.databinding.ListPlaceBinding
+import ddwu.com.mobile.movielog.data.Item
+import ddwu.com.mobile.movielog.databinding.ListPlaceBinding
 
 class PlaceAdapter: RecyclerView.Adapter<PlaceAdapter.PlaceHolder>() {
     var places: List<Item>? = null

@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace 'ddwu.com.mobile.movieapp'
+    namespace 'ddwu.com.mobile.movielog'
     compileSdk 34
 
     defaultConfig {
-        applicationId "ddwu.com.mobile.movieapp"
+        applicationId "ddwu.com.mobile.movielog"
         minSdk 26
         targetSdk 33
         versionCode 1

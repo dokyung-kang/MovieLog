@@ -1,4 +1,4 @@
-package ddwu.com.mobile.movieapp.data
+package ddwu.com.mobile.movielog.data
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

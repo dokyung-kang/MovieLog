@@ -1,4 +1,4 @@
-package ddwu.com.mobile.movieapp.data
+package ddwu.com.mobile.movielog.data
 
 import android.content.Context
 import androidx.room.Database

@@ -1,12 +1,12 @@
-package ddwu.com.mobile.movieapp.ui
+package ddwu.com.mobile.movielog.ui
 
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import ddwu.com.mobile.movieapp.data.Diary
-import ddwu.com.mobile.movieapp.databinding.ListDiaryBinding
+import ddwu.com.mobile.movielog.data.Diary
+import ddwu.com.mobile.movielog.databinding.ListDiaryBinding
 
 class DiaryAdapter(val diarys: List<Diary>) : RecyclerView.Adapter<DiaryAdapter.DiaryViewHolder>() {
     val TAG = "DiaryAdapter"

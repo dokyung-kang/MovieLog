@@ -1,11 +1,11 @@
-package ddwu.com.mobile.movieapp.ui
+package ddwu.com.mobile.movielog.ui
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import ddwu.com.mobile.movieapp.data.MovieList
-import ddwu.com.mobile.movieapp.databinding.ListMovieBinding
+import ddwu.com.mobile.movielog.data.MovieList
+import ddwu.com.mobile.movielog.databinding.ListMovieBinding
 
 class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieHolder>() {
     var movies: List<MovieList>? = null

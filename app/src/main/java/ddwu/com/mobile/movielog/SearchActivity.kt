@@ -1,4 +1,4 @@
-package ddwu.com.mobile.movieapp
+package ddwu.com.mobile.movielog
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,10 +7,10 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import ddwu.com.mobile.movieapp.data.Root
-import ddwu.com.mobile.movieapp.databinding.ActivityMovieBinding
-import ddwu.com.mobile.movieapp.network.IMovieOfficeAPIService
-import ddwu.com.mobile.movieapp.ui.MovieAdapter
+import ddwu.com.mobile.movielog.data.Root
+import ddwu.com.mobile.movielog.databinding.ActivityMovieBinding
+import ddwu.com.mobile.movielog.network.IMovieOfficeAPIService
+import ddwu.com.mobile.movielog.ui.MovieAdapter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

@@ -1,6 +1,6 @@
-package ddwu.com.mobile.movieapp.network
+package ddwu.com.mobile.movielog.network
 
-import ddwu.com.mobile.movieapp.data.Root
+import ddwu.com.mobile.movielog.data.Root
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

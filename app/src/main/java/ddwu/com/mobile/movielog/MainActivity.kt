@@ -1,9 +1,9 @@
-package ddwu.com.mobile.movieapp
+package ddwu.com.mobile.movielog
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import ddwu.com.mobile.movieapp.databinding.ActivityMainBinding
+import ddwu.com.mobile.movielog.databinding.ActivityMainBinding
 
 class MainActivity: AppCompatActivity() {
     private val TAG = "MainActivity"

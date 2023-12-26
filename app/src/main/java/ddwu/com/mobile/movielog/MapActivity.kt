@@ -1,14 +1,11 @@
-package ddwu.com.mobile.movieapp
+package ddwu.com.mobile.movielog
 
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Color
-import android.location.Address
 import android.location.Geocoder
 import android.location.Location
-import android.net.Uri
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
@@ -33,12 +30,10 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.gms.maps.model.PolylineOptions
-import com.google.android.gms.maps.model.StyleSpan
-import ddwu.com.mobile.movieapp.data.PlaceRoot
-import ddwu.com.mobile.movieapp.databinding.ActivityMapBinding
-import ddwu.com.mobile.movieapp.network.IPlaceAPIService
-import ddwu.com.mobile.movieapp.ui.PlaceAdapter
+import ddwu.com.mobile.movielog.data.PlaceRoot
+import ddwu.com.mobile.movielog.databinding.ActivityMapBinding
+import ddwu.com.mobile.movielog.network.IPlaceAPIService
+import ddwu.com.mobile.movielog.ui.PlaceAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

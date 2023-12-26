@@ -1,15 +1,13 @@
-package ddwu.com.mobile.movieapp
+package ddwu.com.mobile.movielog
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import ddwu.com.mobile.movieapp.data.Diary
-import ddwu.com.mobile.movieapp.data.DiaryDao
-import ddwu.com.mobile.movieapp.data.DiaryDatabase
-import ddwu.com.mobile.movieapp.databinding.ActivityUpdateBinding
-import ddwu.com.mobile.movieapp.ui.DetailAdapter
+import ddwu.com.mobile.movielog.data.Diary
+import ddwu.com.mobile.movielog.data.DiaryDao
+import ddwu.com.mobile.movielog.data.DiaryDatabase
+import ddwu.com.mobile.movielog.databinding.ActivityUpdateBinding
+import ddwu.com.mobile.movielog.ui.DetailAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

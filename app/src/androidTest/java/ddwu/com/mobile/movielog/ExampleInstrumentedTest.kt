@@ -1,4 +1,4 @@
-package ddwu.com.mobile.movieapp
+package ddwu.com.mobile.movielog
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
