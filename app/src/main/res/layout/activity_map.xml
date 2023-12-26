@@ -53,7 +53,8 @@
         android:id="@+id/btnSearch2"
         style="@style/Widget.AppCompat.Button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:background="@color/black"
@@ -61,13 +62,12 @@
         android:textColor="@color/blue"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/etKeyword"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
     <EditText
         android:id="@+id/etKeyword"
-        android:layout_width="274dp"
+        android:layout_width="280dp"
         android:layout_height="46dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
@@ -80,46 +80,59 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnPermit"
         style="@style/Widget.AppCompat.Button"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="권한"
         android:background="@color/black"
+        android:text="권한"
         android:textColor="@color/blue"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etKeyword" />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnClo"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/black"
+        android:text="닫기"
+        android:textColor="@color/blue"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnLocStop"
+        app:layout_constraintTop_toBottomOf="@+id/etKeyword" />
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnLocStart"
         style="@style/Widget.AppCompat.Button"
-        android:layout_width="135dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_width="110dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
         android:background="@color/black"
         android:text="위치 확인 시작"
         android:textColor="@color/blue"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/btnLocStop"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/btnPermit"
         app:layout_constraintTop_toBottomOf="@+id/etKeyword" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnLocStop"
         style="@style/Widget.AppCompat.Button"
-        android:layout_width="135dp"
-        android:layout_height="wrap_content"
+        android:layout_width="110dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
         android:background="@color/black"
         android:text="위치 확인 중지"
         android:textColor="@color/blue"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnLocStart"
         app:layout_constraintTop_toBottomOf="@+id/etKeyword" />
 
     <fragment

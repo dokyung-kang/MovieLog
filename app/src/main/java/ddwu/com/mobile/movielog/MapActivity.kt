@@ -119,6 +119,10 @@ class MapActivity: AppCompatActivity() {
             fusedLocationClient.removeLocationUpdates(locCallback)
         }
 
+        mapBinding.btnClo.setOnClickListener {
+            finish()
+        }
+
         val mapFragment: SupportMapFragment
                 = supportFragmentManager.findFragmentById(R.id.map)
                 as SupportMapFragment

@@ -75,6 +75,10 @@ class SearchActivity : AppCompatActivity()  {
 
         }
 
+        binding.btnCLos.setOnClickListener {
+            finish()
+        }
+
         val onClickListener = object: MovieAdapter.OnItemClickListener {
             override fun onItemClickListener(view: View, pos: Int) {
                 Log.d(TAG, "Short Click!! $pos")
