@@ -55,8 +55,7 @@ class MovieActivity : AppCompatActivity()  {
         }
 
         binding.mvBtn2.setOnClickListener {
-            var intent2 = Intent(this, SearchActivity::class.java)
-            startActivity(intent2)
+            finish()
         }
     }
 }

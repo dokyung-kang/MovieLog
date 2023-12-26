@@ -92,11 +92,10 @@ class DiaryActivity : AppCompatActivity()  {
         CoroutineScope(Dispatchers.IO).launch {
             val flowDiarys: Flow<List<Diary>> = diaryDao.getAllDiarys()
             flowDiarys.collect{ diaries ->
-                diarys.clear() // 기존 데이터를 지우고 새로 받아온 데이터로 채웁니다.
+                diarys.clear()
                 for (diary in diaries) {
                     diarys.add(Diary(diary._id, diary.title, diary.movieNm, diary.cimena, diary.createDate, diary.createTime, diary.dContent))
                 }
-                // 데이터가 갱신되었으므로 어댑터에 알려줍니다.
                 runOnUiThread {
                     diaryAdapter.notifyDataSetChanged()
                 }

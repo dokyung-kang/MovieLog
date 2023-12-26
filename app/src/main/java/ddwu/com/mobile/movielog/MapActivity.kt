@@ -109,8 +109,6 @@ class MapActivity: AppCompatActivity() {
 
         mapBinding.btnPermit.setOnClickListener {
             checkPermissions()
-//            addMarker(LatLng(37.606320, 127.041808))
-//            drawLine()
         }
 
         mapBinding.btnLocStart.setOnClickListener {
@@ -141,7 +139,6 @@ class MapActivity: AppCompatActivity() {
         adapter.setOnItemClickListener(onClickListener)
 
         mapBinding.rvPlaces.adapter = adapter
-
     }
 
 
@@ -150,15 +147,6 @@ class MapActivity: AppCompatActivity() {
         override fun onMapReady(map: GoogleMap) {
             googleMap = map
             Log.d(TAG, "GoogleMap is ready")
-
-            googleMap.setOnMarkerClickListener {
-//                Toast.makeText(this@MapActivity, it.tag.toString(), Toast.LENGTH_SHORT).show()
-                false
-            }
-
-            googleMap.setOnMapClickListener { latLng ->
-//                Toast.makeText(this@MapActivity, latLng.toString(), Toast.LENGTH_SHORT).show()
-            }
 
             googleMap.setOnInfoWindowClickListener {
                 val alertDialog = AlertDialog.Builder(this@MapActivity)
@@ -216,7 +204,6 @@ class MapActivity: AppCompatActivity() {
 
         centerMarker = googleMap.addMarker(markerOptions)
         centerMarker?.showInfoWindow()
-//        centerMarker?.tag = "database_id"
     }
 
     /*위치 정보 수신 시 수행할 동작을 정의하는 Callback*/
@@ -227,8 +214,6 @@ class MapActivity: AppCompatActivity() {
             addMarker(LatLng(currentLoc.latitude, currentLoc.longitude))
             geocoder.getFromLocation(currentLoc.latitude, currentLoc.longitude, 5) { addresses ->
                 CoroutineScope(Dispatchers.Main).launch {
-//                    showData("위도: ${currentLoc.latitude}, 경도: ${currentLoc.longitude}")
-//                    showData(addresses?.get(0)?.getAddressLine(0).toString())
                 }
             }
             val targetLoc: LatLng = LatLng(currentLoc.latitude, currentLoc.longitude)
@@ -251,7 +236,6 @@ class MapActivity: AppCompatActivity() {
             Looper.getMainLooper()  // System 메시지 수신 Looper
         )
     }
-
 
 
     override fun onPause() {
